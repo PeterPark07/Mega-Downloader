@@ -11,9 +11,9 @@ def index():
 @app.route('/download', methods=['POST'])
 def download():
     url = request.form['url']
-    file = download_file_from_mega(url)
+    files = download_file_from_mega(url)
     # Provide the download link to the user
-    return render_template('download.html', file=file)
+    return render_template('download.html', files=files)
 
 if __name__ == '__main__':
     app.run(debug=True)
