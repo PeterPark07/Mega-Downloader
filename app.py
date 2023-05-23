@@ -12,8 +12,8 @@ def index():
 def download():
     url = request.form['url']
     files = download_file_from_mega(url)
-    # Provide the download link to the user
-    return render_template('download.html', files=files)
+    download_link = '/opt/render/mega/' + files[0]  # Assuming there's only one file
+    return jsonify(download_link=download_link)
 
 if __name__ == '__main__':
     app.run(debug=True)
