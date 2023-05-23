@@ -5,9 +5,10 @@
 </head>
 <body>
     <h1>Mega Downloader</h1>
-    <form method="POST" action="/">
-        <input type="text" name="url" placeholder="Enter Mega URL" required>
-        <button type="submit">Download</button>
+    <form action="/download" method="post">
+        <label for="url">Enter MEGA link:</label>
+        <input type="text" name="url" id="url">
+        <input type="submit" value="Download">
     </form>
 </body>
 </html>
