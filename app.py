@@ -12,7 +12,7 @@ def index():
 def download():
     url = request.form['url']
     files = download_file_from_mega(url)
-    download_link = files[0]  # Assuming there's only one file
+    file_path = files[0]  # Assuming there's only one file
     return send_file(file_path, as_attachment=True)
 
 if __name__ == '__main__':
