@@ -1,7 +1,7 @@
 import time
 import os
 from mega import Mega
-from helper.files import get_directory_size , delete_files_in_directory
+from helper.files import get_directory_size , delete_files_in_directory , get_files_in_directory
 
 def download_file_from_mega(url):
     # Instantiate the Mega object
@@ -37,3 +37,5 @@ def download_file_from_mega(url):
     print(f"Download completed in {duration:.2f} seconds.")
     print(f"File is {file_size} MB in size
     print(f"Download speed: {download_speed:.2f} MBs/second")
+    print(get_files_in_directory(output_path))
+    return get_files_in_directory(output_path)
