@@ -1,14 +1,33 @@
-<!DOCTYPE html>
 <html>
-<head>
-    <title>Mega Downloader</title>
-</head>
 <body>
     <h1>Mega Downloader</h1>
-    <form action="/download" method="post">
+    <form id="downloadForm">
         <label for="url">Enter MEGA link:</label>
         <input type="text" name="url" id="url">
         <input type="submit" value="Download">
     </form>
+    <div id="downloadStatus"></div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#downloadForm').submit(function(e) {
+                e.preventDefault();
+                var url = $('#url').val();
+                $('#downloadStatus').text('Downloading file...');
+                $.ajax({
+                    url: '/download',
+                    type: 'POST',
+                    data: { url: url },
+                    success: function(response) {
+                        $('#downloadStatus').html('Download completed. <a href="' + response.download_link + '">Download Link</a>');
+                    },
+                    error: function() {
+                        $('#downloadStatus').text('An error occurred during download.');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
