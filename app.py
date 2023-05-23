@@ -12,7 +12,7 @@ def index():
 def download():
     url = request.form['url']
     files = download_file_from_mega(url)
-    download_link = '/opt/render/mega/' + files[0]  # Assuming there's only one file
+    download_link = files[0]  # Assuming there's only one file
     return jsonify(download_link=download_link)
 
 if __name__ == '__main__':
