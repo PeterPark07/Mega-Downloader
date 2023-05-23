@@ -1,12 +1,19 @@
 <html>
 <body>
     <h1>Mega Downloader</h1>
-    <form id="downloadForm">
+    <form id="downloadForm" action="/download" method="POST">
         <label for="url">Enter MEGA link:</label>
         <input type="text" name="url" id="url">
         <input type="submit" value="Download">
     </form>
-    <div id="downloadStatus"></div>
+    <div id="downloadStatus">
+        {% if download_status %}
+            <p>{{ download_status }}</p>
+            {% if download_link %}
+                <a href="{{ download_link }}">Download link</a>
+            {% endif %}
+        {% endif %}
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
@@ -14,25 +21,16 @@
             $('#downloadForm').submit(function(e) {
                 e.preventDefault();
                 var url = $('#url').val();
-                $('#downloadStatus').text('Downloading file...');
+                $('#downloadStatus').html('<p>Downloading file...</p>');
                 $.ajax({
                     url: '/download',
                     type: 'POST',
                     data: { url: url },
-                    xhrFields: {
-                        responseType: 'blob'
-                    },
                     success: function(response) {
-                        $('#downloadStatus').text('Download completed.');
-                        var url = URL.createObjectURL(response);
-                        var link = document.createElement('a');
-                        link.href = url;
-                        link.download = response.name;
-                        link.click();
-                        URL.revokeObjectURL(url);
+                        $('#downloadStatus').html('<p>Download completed.</p><a href="' + response + '">Download link</a>');
                     },
                     error: function() {
-                        $('#downloadStatus').text('An error occurred during download.');
+                        $('#downloadStatus').html('<p>An error occurred during download.</p>');
                     }
                 });
             });
