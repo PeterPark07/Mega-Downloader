@@ -19,8 +19,17 @@
                     url: '/download',
                     type: 'POST',
                     data: { url: url },
+                    xhrFields: {
+                        responseType: 'blob'
+                    },
                     success: function(response) {
-                        $('#downloadStatus').html('Download completed. <a href="' + response.download_link + '">Download Link</a>');
+                        $('#downloadStatus').text('Download completed.');
+                        var url = URL.createObjectURL(response);
+                        var link = document.createElement('a');
+                        link.href = url;
+                        link.download = response.name;
+                        link.click();
+                        URL.revokeObjectURL(url);
                     },
                     error: function() {
                         $('#downloadStatus').text('An error occurred during download.');
