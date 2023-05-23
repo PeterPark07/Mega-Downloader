@@ -18,7 +18,7 @@ def download_file_from_mega(url):
 
     # Start time tracking
     start_time = time.time()
-
+    print("=" * 80 , "Starting Download")
     # Download the file using the URL
     mega.download_url(url, output_path)
 
