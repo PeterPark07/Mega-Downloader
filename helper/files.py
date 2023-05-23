@@ -22,4 +22,4 @@ def get_files_in_directory(directory, size_threshold=10):
             file_size = os.path.getsize(file_path)
             if file_size >= size_threshold * 1048576:  # Convert size threshold to bytes
                 file_paths.append(file_path)
-    return file_paths[0]
+    return file_paths
